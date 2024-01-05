@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Jenky\JsonPlaceholder;
 
-use Jenky\Atlas\Contracts\ConnectorInterface;
-use Jenky\Atlas\Traits\ConnectorTrait;
+use Fansipan\Contracts\ConnectorInterface;
+use Fansipan\Traits\ConnectorTrait;
 use Jenky\JsonPlaceholder\Post\PostResource;
 use Jenky\JsonPlaceholder\Post\PostsResource;
 use Jenky\JsonPlaceholder\User\UserResource;

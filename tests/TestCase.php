@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Jenky\JsonPlaceholder\Tests;
 
-use Jenky\Atlas\Mock\MockClient;
-use Jenky\Atlas\Mock\MockResponse;
+use Fansipan\Mock\MockClient;
+use Fansipan\Mock\MockResponse;
 use Jenky\JsonPlaceholder\JsonPlaceholder;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

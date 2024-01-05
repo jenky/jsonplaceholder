@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jenky\JsonPlaceholder\Tests;
 
 use Jenky\JsonPlaceholder\DTO\Post;
+use Jenky\JsonPlaceholder\DTO\PostCollection;
 
 final class PostTest extends TestCase
 {
@@ -14,11 +15,12 @@ final class PostTest extends TestCase
             __DIR__.'/fixtures/post/posts.json'
         ))->posts()->get();
 
+        $this->assertInstanceOf(PostCollection::class, $posts);
         $this->assertCount(100, $posts);
         $this->assertSame('sunt aut facere repellat provident occaecati excepturi optio reprehenderit', $posts[0]->title);
     }
 
-    public function test_find_user_by_id(): void
+    public function test_find_post_by_id(): void
     {
         $post = $this->sdk->post($id = rand(1, 10))->get();
 

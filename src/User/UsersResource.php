@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Jenky\JsonPlaceholder\User;
 
-use CuyZ\Valinor\MapperBuilder;
-use Jenky\JsonPlaceholder\DTO\User;
+use Jenky\JsonPlaceholder\DTO\UserCollection;
 use Jenky\JsonPlaceholder\JsonPlaceholder;
 
 final class UsersResource
@@ -16,17 +15,11 @@ final class UsersResource
 
     /**
      * Get list of users.
-     *
-     * @return User[]
      */
-    public function get(): array
+    public function get(): UserCollection
     {
-        $response = $this->connector->send(new GetUsersRequest())
-            ->throw();
-
-        return (new MapperBuilder())
-            ->allowSuperfluousKeys()
-            ->mapper()
-            ->map(User::class.'[]', $response->data());
+        return $this->connector->send(new GetUsersRequest())
+            ->throw()
+            ->object();
     }
 }

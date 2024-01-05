@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Jenky\JsonPlaceholder\Tests;
 
+use Jenky\JsonPlaceholder\DTO\PostCollection;
 use Jenky\JsonPlaceholder\DTO\User;
+use Jenky\JsonPlaceholder\DTO\UserCollection;
 
 final class UserTest extends TestCase
 {
@@ -14,6 +16,7 @@ final class UserTest extends TestCase
             __DIR__.'/fixtures/user/users.json'
         ))->users()->get();
 
+        $this->assertInstanceOf(UserCollection::class, $users);
         $this->assertCount(10, $users);
         $this->assertSame('Leanne Graham', $users[0]->name);
     }
@@ -32,6 +35,7 @@ final class UserTest extends TestCase
             $this->createMockClient(__DIR__.'/fixtures/user/posts.json')
         )->user(1)->posts();
 
+        $this->assertInstanceOf(PostCollection::class, $posts);
         $this->assertCount(10, $posts);
         $this->assertSame(1, $posts[0]->userId);
     }
