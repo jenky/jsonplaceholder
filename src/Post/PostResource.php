@@ -18,7 +18,7 @@ final class PostResource
     /**
      * Get a single post.
      */
-    public function get(): Post
+    public function find(): Post
     {
         return $this->connector->send(new FindPostRequest($this->id))
             ->throw()

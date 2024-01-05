@@ -6,10 +6,12 @@ namespace Jenky\JsonPlaceholder;
 
 use Fansipan\Contracts\ConnectorInterface;
 use Fansipan\Traits\ConnectorTrait;
+use Jenky\JsonPlaceholder\DTO\PostCollection;
+use Jenky\JsonPlaceholder\DTO\UserCollection;
+use Jenky\JsonPlaceholder\Post\GetPostsRequest;
 use Jenky\JsonPlaceholder\Post\PostResource;
-use Jenky\JsonPlaceholder\Post\PostsResource;
+use Jenky\JsonPlaceholder\User\GetUsersRequest;
 use Jenky\JsonPlaceholder\User\UserResource;
-use Jenky\JsonPlaceholder\User\UsersResource;
 
 final class JsonPlaceholder implements ConnectorInterface
 {
@@ -20,9 +22,14 @@ final class JsonPlaceholder implements ConnectorInterface
         return 'https://jsonplaceholder.typicode.com/';
     }
 
-    public function users(): UsersResource
+    /**
+     * Get list of users.
+     */
+    public function users(): UserCollection
     {
-        return new UsersResource($this);
+        return $this->send(new GetUsersRequest())
+            ->throw()
+            ->object();
     }
 
     public function user(int $id): UserResource
@@ -30,9 +37,14 @@ final class JsonPlaceholder implements ConnectorInterface
         return new UserResource($this, $id);
     }
 
-    public function posts(): PostsResource
+    /**
+     * Get list of posts.
+     */
+    public function posts(): PostCollection
     {
-        return new PostsResource($this);
+        return $this->send(new GetPostsRequest())
+            ->throw()
+            ->object();
     }
 
     public function post(int $id): PostResource

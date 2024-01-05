@@ -19,7 +19,7 @@ final class UserResource
     /**
      * Get a single user.
      */
-    public function get(): User
+    public function find(): User
     {
         return $this->connector->send(new FindUserRequest($this->id))
             ->throw()

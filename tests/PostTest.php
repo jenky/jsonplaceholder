@@ -13,7 +13,7 @@ final class PostTest extends TestCase
     {
         $posts = $this->sdk->withClient($this->createMockClient(
             __DIR__.'/fixtures/post/posts.json'
-        ))->posts()->get();
+        ))->posts();
 
         $this->assertInstanceOf(PostCollection::class, $posts);
         $this->assertCount(100, $posts);
@@ -22,7 +22,7 @@ final class PostTest extends TestCase
 
     public function test_find_post_by_id(): void
     {
-        $post = $this->sdk->post($id = rand(1, 10))->get();
+        $post = $this->sdk->post($id = rand(1, 10))->find();
 
         $this->assertInstanceOf(Post::class, $post);
         $this->assertSame($id, $post->id);
