@@ -11,12 +11,19 @@ use Fansipan\Contracts\MapperInterface;
 use Fansipan\Decoder\ChainDecoder;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @template T of object
+ * @implements MapperInterface<T>
+ */
 final class ValinorDecoder implements DecoderInterface, MapperInterface
 {
     private TreeMapper $mapper;
 
     private DecoderInterface $decoder;
 
+    /**
+     * @param  string|class-string<T> $signature
+     */
     public function __construct(
         private readonly string $signature,
         ?TreeMapper $mapper = null,
@@ -32,10 +39,9 @@ final class ValinorDecoder implements DecoderInterface, MapperInterface
     public function map(ResponseInterface $response): ?object
     {
         $status = $response->getStatusCode();
-        $decoded = $this->decode($response);
 
         if ($status >= 200 && $status < 300) {
-            return $this->mapper->map($this->signature, $decoded);
+            return $this->mapper->map($this->signature, $this->decode($response));
         } else {
             return null;
         }
