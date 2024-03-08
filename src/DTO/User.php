@@ -13,7 +13,8 @@ final class User
         public readonly string $username,
         public readonly string $email,
         public readonly string $phone,
-        public readonly string $website
+        public readonly string $website,
+        public readonly Company $company
     ) {
     }
 }
