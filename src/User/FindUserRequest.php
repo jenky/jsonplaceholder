@@ -6,11 +6,12 @@ namespace Jenky\JsonPlaceholder\User;
 
 use Fansipan\Contracts\DecoderInterface;
 use Fansipan\Request;
+use Jenky\JsonPlaceholder\DTO\ErrorResponse;
 use Jenky\JsonPlaceholder\DTO\User;
 use Jenky\JsonPlaceholder\ValinorDecoder;
 
 /**
- * @extends Request<User>
+ * @extends Request<User|ErrorResponse>
  */
 final class FindUserRequest extends Request
 {

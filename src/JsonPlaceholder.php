@@ -6,11 +6,7 @@ namespace Jenky\JsonPlaceholder;
 
 use Fansipan\Contracts\ConnectorInterface;
 use Fansipan\Traits\ConnectorTrait;
-use Jenky\JsonPlaceholder\DTO\PostCollection;
-use Jenky\JsonPlaceholder\DTO\UserCollection;
-use Jenky\JsonPlaceholder\Post\GetPostsRequest;
 use Jenky\JsonPlaceholder\Post\PostResource;
-use Jenky\JsonPlaceholder\User\GetUsersRequest;
 use Jenky\JsonPlaceholder\User\UserResource;
 
 final class JsonPlaceholder implements ConnectorInterface
@@ -25,30 +21,13 @@ final class JsonPlaceholder implements ConnectorInterface
     /**
      * Get list of users.
      */
-    public function users(): UserCollection
+    public function users(): UserResource
     {
-        return $this->send(new GetUsersRequest())
-            ->throw()
-            ->object();
+        return new UserResource($this);
     }
 
-    public function user(int $id): UserResource
+    public function posts(): PostResource
     {
-        return new UserResource($this, $id);
-    }
-
-    /**
-     * Get list of posts.
-     */
-    public function posts(): PostCollection
-    {
-        return $this->send(new GetPostsRequest())
-            ->throw()
-            ->object();
-    }
-
-    public function post(int $id): PostResource
-    {
-        return new PostResource($this, $id);
+        return new PostResource($this);
     }
 }

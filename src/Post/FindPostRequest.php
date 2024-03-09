@@ -6,11 +6,12 @@ namespace Jenky\JsonPlaceholder\Post;
 
 use Fansipan\Contracts\DecoderInterface;
 use Fansipan\Request;
+use Jenky\JsonPlaceholder\DTO\ErrorResponse;
 use Jenky\JsonPlaceholder\DTO\Post;
 use Jenky\JsonPlaceholder\ValinorDecoder;
 
 /**
- * @extends Request<Post>
+ * @extends Request<Post|ErrorResponse>
  */
 final class FindPostRequest extends Request
 {

@@ -1,6 +1,6 @@
 {
     "name": "jenky/jsonplaceholder",
-    "description": "Example of Atlas using JSON Placeholder",
+    "description": "JSON Placeholder SDK",
     "keywords": [
         "atlas",
         "jsonplaceholder",
@@ -17,8 +17,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "cuyz/valinor": "^1.4",
-        "fansipan/fansipan": "^0.8",
+        "cuyz/valinor": "^1.9",
+        "fansipan/fansipan": "^1.0",
         "guzzlehttp/guzzle": "^7.7",
         "ramsey/collection": "^2.0"
     },

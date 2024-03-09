@@ -9,6 +9,7 @@ use CuyZ\Valinor\MapperBuilder;
 use Fansipan\Contracts\DecoderInterface;
 use Fansipan\Contracts\MapperInterface;
 use Fansipan\Decoder\ChainDecoder;
+use Jenky\JsonPlaceholder\DTO\ErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -43,7 +44,7 @@ final class ValinorDecoder implements DecoderInterface, MapperInterface
         if ($status >= 200 && $status < 300) {
             return $this->mapper->map($this->signature, $this->decode($response));
         } else {
-            return null;
+            return ErrorResponse::fromResponse($response); // @phpstan-ignore-line
         }
     }
 

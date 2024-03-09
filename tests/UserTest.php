@@ -14,7 +14,7 @@ final class UserTest extends TestCase
     {
         $users = $this->sdk->withClient($this->createMockClient(
             __DIR__.'/fixtures/user/users.json'
-        ))->users();
+        ))->users()->get();
 
         $this->assertInstanceOf(UserCollection::class, $users);
         $this->assertCount(10, $users);
@@ -23,7 +23,7 @@ final class UserTest extends TestCase
 
     public function test_find_user_by_id(): void
     {
-        $user = $this->sdk->user($id = rand(1, 10))->find();
+        $user = $this->sdk->users()->id($id = rand(1, 10))->find();
 
         $this->assertInstanceOf(User::class, $user);
         $this->assertSame($id, $user->id);
@@ -33,7 +33,11 @@ final class UserTest extends TestCase
     {
         $posts = $this->sdk->withClient(
             $this->createMockClient(__DIR__.'/fixtures/user/posts.json')
-        )->user(1)->posts();
+        )
+            ->users()
+            ->id(1)
+            ->posts()
+            ->get();
 
         $this->assertInstanceOf(PostCollection::class, $posts);
         $this->assertCount(10, $posts);
