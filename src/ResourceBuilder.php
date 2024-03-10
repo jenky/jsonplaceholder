@@ -15,6 +15,7 @@ abstract class ResourceBuilder
 
     /**
      * @param  T $connector
+     * @param  array<string, string|int> $refs
      */
     public function __construct(
         protected ConnectorInterface $connector,
@@ -22,6 +23,9 @@ abstract class ResourceBuilder
     ) {
     }
 
+    /**
+     * Set the id of the current resource.
+     */
     public function id(string|int $id): static
     {
         $clone = clone $this;
@@ -32,15 +36,17 @@ abstract class ResourceBuilder
     }
 
     /**
+     * Forward to another resource with current resource references.
+     *
      * @template TResource of ResourceBuilder
      *
-     * @param  class-string<TResource> $builder
+     * @param  class-string<TResource> $resource
      * @return TResource
      */
-    protected function forward(string $builder): ResourceBuilder
+    protected function forward(string $resource): ResourceBuilder
     {
-        \assert(\is_subclass_of($builder, ResourceBuilder::class, true));
+        \assert(\is_subclass_of($resource, ResourceBuilder::class, true));
 
-        return new $builder($this->connector, $this->refs);
+        return new $resource($this->connector, $this->refs);
     }
 }
