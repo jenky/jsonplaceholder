@@ -18,9 +18,6 @@ final class JsonPlaceholder implements ConnectorInterface
         return 'https://jsonplaceholder.typicode.com/';
     }
 
-    /**
-     * Get list of users.
-     */
     public function users(): UserResource
     {
         return new UserResource($this);
