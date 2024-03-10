@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @template T of object
- * @implements MapperInterface<T>
+ * @implements MapperInterface<T|ErrorResponse>
  */
 final class ValinorDecoder implements DecoderInterface, MapperInterface
 {
@@ -44,7 +44,7 @@ final class ValinorDecoder implements DecoderInterface, MapperInterface
         if ($status >= 200 && $status < 300) {
             return $this->mapper->map($this->signature, $this->decode($response));
         } else {
-            return ErrorResponse::fromResponse($response); // @phpstan-ignore-line
+            return ErrorResponse::fromResponse($response);
         }
     }
 
