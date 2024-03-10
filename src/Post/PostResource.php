@@ -23,7 +23,7 @@ final class PostResource extends ResourceBuilder
     public function get(?int $page = null, ?int $limit = null): PostCollection|ErrorResponse
     {
         $userId = $this->refs[UserResource::class] ?? null;
-        $request = $userId ? new GetUserPostsRequest($userId) : new GetPostsRequest();
+        $request = $userId ? new GetUserPostsRequest((int) $userId) : new GetPostsRequest();
 
         if ($page) {
             $request = $request->page($page);
